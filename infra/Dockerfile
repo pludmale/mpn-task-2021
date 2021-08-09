@@ -1,4 +1,4 @@
-FROM php:8.0-fpm
+FROM php:8.0.9-fpm-alpine
 
 RUN apt-get update -y \
     && apt-get install -y nginx
@@ -21,6 +21,8 @@ RUN { \
         echo 'opcache.fast_shutdown=1'; \
         echo 'opcache.enable_cli=1'; \
     } > /usr/local/etc/php/conf.d/php-opocache-cfg.ini
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY entrypoint.sh /etc/entrypoint.sh
