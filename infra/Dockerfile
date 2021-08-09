@@ -24,10 +24,10 @@ RUN { \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY infra/nginx.conf /etc/nginx/sites-enabled/default
+COPY infra/default-nginx.conf /etc/nginx/sites-enabled/default
 COPY infra/entrypoint.sh /etc/entrypoint.sh
 
-COPY --chown=www-data:www-data . /var/www/mapon
+COPY --chown=www-data:www-data app /var/www/mapon
 
 WORKDIR /var/www/mapon
 
