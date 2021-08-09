@@ -1,10 +1,11 @@
 FROM php:8.0.9-fpm
 
 RUN apt-get update -y \
-  && apt-get install -y nginx
+  && apt-get install -y nginx \
+  && apt-get install -y git
 
-## PHP_CPPFLAGS are used by the docker-php-ext-* scripts
-#ENV PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
+# PHP_CPPFLAGS are used by the docker-php-ext-* scripts
+ENV PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
 
 RUN docker-php-ext-install pdo_mysql \
     && docker-php-ext-install opcache \
@@ -27,9 +28,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY infra/default-nginx.conf /etc/nginx/sites-enabled/default
 COPY infra/entrypoint.sh /etc/entrypoint.sh
 
-COPY --chown=www-data:www-data app /var/www/mapon
+COPY --chown=www-data:www-data app /var/www/html
 
-WORKDIR /var/www/mapon
+WORKDIR /var/www/html
 
 EXPOSE 80 443
 
