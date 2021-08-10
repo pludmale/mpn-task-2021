@@ -1,18 +1,17 @@
 <?php
 require_once "router.php";
 
-use App\Controllers\LoginController;
-
 route('/', function () {
     return "Hello World";
 });
-route('/login', function () {
-    $loginController = new LoginController();
+route('/login', function ($query = null) {
+    $loginController = new App\Controllers\LoginController();
     return $loginController->login();
 });
-route('/404', function () {
+route('/404', function ($query = null) {
     return "Sorry, the specified page could not be found!";
 });
 
 $action = $_SERVER['REQUEST_URI'];
-dispatch($action);
+$query = $_SERVER['QUERY_STRING'];
+dispatch($action, $query);
