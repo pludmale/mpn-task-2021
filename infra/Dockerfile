@@ -12,7 +12,8 @@ RUN docker-php-ext-install pdo_mysql \
     && apt-get install libicu-dev -y \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
-    && apt-get remove libicu-dev icu-devtools -y
+    && apt-get remove libicu-dev icu-devtools -y \
+    && apt-get -y install mysql-server
 
 RUN { \
         echo 'opcache.memory_consumption=128'; \
