@@ -20,6 +20,15 @@ class LoginControllerTest extends TestCase
 
     public function testLoginReturnsSuccess()
     {
-        $this->assertEquals('Logged in!', $this->controller->login());
+        $query = [
+            'username' => 'borscht',
+            'psw' => 'wxc4e598pn9npxk22'
+        ];
+        $this->assertEquals('Logged in!', $this->controller->login($query));
+    }
+
+    public function testLoginReturnsErrorMsgWhenNoQueryProvided()
+    {
+        $this->assertEquals('No login information provided!', $this->controller->login());
     }
 }
