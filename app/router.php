@@ -20,6 +20,15 @@ function route($action, Closure $callback)
 }
 
 /**
+ * Display view file contents
+ * @param $file string View file path
+ */
+function view($file)
+{
+    echo file_get_contents($file);
+}
+
+/**
  * Dispatch the router
  *
  * @param $action string
@@ -33,6 +42,11 @@ function dispatch($action, $query = null)
         $action = '404';
     }
     $callback = $routes[$action];
-    echo call_user_func($callback, $query);
+
+    $parsedQueryString = [];
+    if ($query !== null) {
+        parse_str($query, $parsedQueryString);
+    }
+    echo call_user_func($callback, $parsedQueryString);
 }
 
