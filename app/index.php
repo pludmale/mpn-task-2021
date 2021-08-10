@@ -1,9 +1,18 @@
 <?php
 require_once "router.php";
 
-route('/', function () { return "Hello World";});
-route('/about', function () { return "Hello from the about route!";});
-route('/404', function () { return "Sorry, the specified page could not be found!"; });
+use App\Controllers\LoginController;
+
+route('/', function () {
+    return "Hello World";
+});
+route('/login', function () {
+    $loginController = new LoginController();
+    return $loginController->login();
+});
+route('/404', function () {
+    return "Sorry, the specified page could not be found!";
+});
 
 $action = $_SERVER['REQUEST_URI'];
 dispatch($action);
