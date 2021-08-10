@@ -17,6 +17,6 @@ route('/404', function ($query = null) {
     return "Sorry, the specified page could not be found!";
 });
 
-$action = $_SERVER['REQUEST_URI'];
+$action = strtok($_SERVER["REQUEST_URI"], '?');
 $query = $_SERVER['QUERY_STRING'];
 dispatch($action, $query);
