@@ -1,5 +1,6 @@
 <?php
-require_once "router.php";
+require_once 'router.php';
+require __DIR__ . '/vendor/autoload.php';
 
 route('/', function () {
     return "Hello World";
